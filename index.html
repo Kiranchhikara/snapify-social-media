@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Clone</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        .header {
+            background-color: #1ecb86;
+            color: white;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .nav {
+            background-color: white;
+            border-bottom: 1px solid #dbdbdb;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #ff3e4d;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #dbdbdb;
+            padding-bottom: 20px;
+        }
+
+        .profile img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 3px solid #ff3e4d;
+        }
+
+        .profile h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #262626;
+        }
+
+        .profile p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .feed {
+            margin-bottom: 20px;
+        }
+
+        .post {
+            border: 1px solid #dbdbdb;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .post:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .post h4 {
+            margin: 0 0 10px;
+            font-size: 16px;
+            color: #262626;
+        }
+
+        .post img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .like-button {
+            background-color: #ff3e4d;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+
+        .like-button:hover {
+            background-color: #ff1f30;
+        }
+
+        .comment-section {
+            margin-top: 10px;
+            display: flexbox;
+            align-items: center;
+        }
+
+        .comment-section input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+
+        .comment-section button {
+            padding: 8px 12px;
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .comment-section button:hover {
+            background-color: #007bbf;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            color: #999;
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #dbdbdb;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer .nav {
+            margin: 10px 0;
+        }
+
+        .footer .nav a {
+            margin: 0 10px;
+            color: #0095f6;
+            transition: color 0.3s;
+        }
+
+        .footer .nav a:hover {
+            text-decoration: underline;
+        }
+
+        .post-form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        .post-form input[type="text"],
+        .post-form input[type="file"] {
+            padding: 10px;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .post-form button {
+            background-color: #1ecb86;
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .post-form button:hover {
+            background-color: #1ecb86;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>Snapify</h1>
+    </header>
+
+    <nav class="nav">
+        <a href="#">Home</a>
+        <a href="profile.html">Profile</a>
+        <a href="aboutus.html">About Us</a>
+    </nav>
+
+    <main class="container">
+        <div class="profile">
+            <img src="instagram.jpg" alt="Profile Picture">
+            
+        </div>
+
+        <div id="feed" class="feed"></div>
+
+        <div class="post-form">
+            <h3>Create Post</h3>
+            <input type="text" id="postContent" placeholder="What's on your mind?" />
+            <input type="file" id="postImage" accept="image/*" />
+            <button onclick="createPost()">Post</button>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="nav">
+            
+            <a href="#">Help</a>
+            <a href="#">Contact</a>
+        </div>
+        <p>&copy; 2024 Snapify. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let posts = [];
+
+        function createPost() {
+            const postContent = document.getElementById('postContent').value;
+            const postImage = document.getElementById('postImage').files[0];
+
+            if (postContent || postImage) {
+                const post = {
+                    id: Date.now(),
+                    content: postContent,
+                    image: postImage ? URL.createObjectURL(postImage) : null,
+                    likes: 0,
+                    comments: []
+                };
+                posts.push(post);
+                document.getElementById('postContent').value = ''; // Clear input
+                document.getElementById('postImage').value = ''; // Clear file input
+                renderPosts();
+            }
+        }
+
+        function renderPosts() {
+            const feed = document.getElementById('feed');
+            feed.innerHTML = '';
+
+            posts.forEach(post => {
+                const postDiv = document.createElement('div');
+                postDiv.classList.add('post');
+                postDiv.innerHTML = `
+                    <h4>Post ID: ${post.id}</h4>
+                    <p>${post.content}</p>
+                    ${post.image ? `<img src="${post.image}" alt="Post Image" />` : ''}
+                    <button class="like-button" onclick="likePost(${post.id})">Like (${post.likes})</button>
+                    <div class="comment-section">
+                         <div id="comments${post.id}"></div>
+                        <input type="text" placeholder="Add a comment..." id="commentInput${post.id}" />
+                       
+                        <button onclick="addComment(${post.id})">Comment</button>
+                        
+                    </div>
+                `;
+                feed.appendChild(postDiv);
+            });
+        }
+
+        function likePost(postId) {
+            const post = posts.find(p => p.id === postId);
+            post.likes++;
+            renderPosts();
+        }
+
+        function addComment(postId) {
+            const commentInput = document.getElementById(`commentInput${postId}`);
+            const comment = commentInput.value;
+            if (comment) {
+                const post = posts.find(p => p.id === postId);
+                post.comments.push(comment);
+                commentInput.value = ''; // Clear input
+                renderComments(postId);
+            }
+        }
+
+        function renderComments(postId) {
+            const post = posts.find(p => p.id === postId);
+            const commentsDiv = document.getElementById(`comments${postId}`);
+            commentsDiv.innerHTML = post.comments.map(comment => `<p>${comment}</p>`).join('');
+        }
+
+        // Initial render
+        renderPosts();
+    </script>
+</body>
+</html>

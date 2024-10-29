@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            
+            
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            background-color: #1ecb86;
+            color: white;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .nav {
+            background-color: #ffffff;
+            border-bottom: 1px solid #dbdbdb;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #ff3e4d;
+        }
+
+        .profile {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            margin: 20px auto;
+            flex: 1; /* Allow profile to take available space */
+        }
+
+        .profile img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid #ff3e4d;
+            margin-bottom: 20px;
+        }
+
+        .profile h2 {
+            font-size: 28px;
+            margin: 15px 0;
+            color: #333;
+        }
+
+        .profile p {
+            font-size: 18px;
+            color: #777;
+            margin: 0;
+            padding: 0 10px;
+        }
+
+        .edit-button {
+            background-color: #1ecb86;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 15px;
+        }
+
+        .edit-button:hover {
+            background-color: #1ecb86;
+            transform: scale(1.05);
+        }
+
+        .edit-form {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .edit-form input, .edit-form textarea {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .edit-form button {
+            background-color: #ff3e4d;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .edit-form button:hover {
+            background-color: #e63946;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            color: #999;
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #dbdbdb;
+          
+            margin-top: 6rem; /* Push footer to the bottom */
+        }
+
+        .footer .nav {
+            margin: 10px 0;
+        }
+
+        .footer .nav a {
+            margin: 0 10px;
+            color: #0095f6;
+            transition: color 0.3s;
+        }
+
+        .footer .nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>Snapify</h1>
+    </header>
+
+    <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="#">Profile</a>
+        <a href="aboutus.html">About Us</a>
+    </nav>
+
+    <div class="profile">
+        <img id="profileImage" src="instagram.jpg" alt="Profile Picture">
+        <h2 id="profileName">Kiran Chhikara</h2>
+        <p id="profileBio">Sharing my journey through travel and photography!</p>
+        <button class="edit-button" onclick="toggleEditForm()">Edit Profile</button>
+
+        <div class="edit-form" id="editForm">
+            <input type="text" id="editName" placeholder="Edit Name">
+            <textarea id="editBio" rows="3" placeholder="Edit Bio"></textarea>
+            <input type="file" id="editImage" accept="image/*">
+            <button onclick="saveProfile()">Save Changes</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="nav">
+          
+            <a href="#">Help</a>
+            <a href="#">Contact</a>
+        </div>
+        <p>&copy; 2024 Snapify. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleEditForm() {
+            const editForm = document.getElementById('editForm');
+            editForm.style.display = editForm.style.display === 'none' || editForm.style.display === '' ? 'block' : 'none';
+        }
+
+        function saveProfile() {
+            const name = document.getElementById('editName').value;
+            const bio = document.getElementById('editBio').value;
+            const imageInput = document.getElementById('editImage');
+            
+            // Update name and bio
+            if (name) document.getElementById('profileName').innerText = name;
+            if (bio) document.getElementById('profileBio').innerText = bio;
+
+            // Update profile picture
+            if (imageInput.files && imageInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profileImage').src = e.target.result;
+                }
+                reader.readAsDataURL(imageInput.files[0]);
+            }
+
+            // Clear the input fields
+            document.getElementById('editName').value = '';
+            document.getElementById('editBio').value = '';
+            imageInput.value = '';
+
+            // Hide the edit form
+            toggleEditForm();
+        }
+    </script>
+</body>
+</html>

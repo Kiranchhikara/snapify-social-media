@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Clone</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        .header {
+            background-color: #1ecb86;
+            color: white;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .nav {
+            background-color: white;
+            border-bottom: 1px solid #dbdbdb;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #ff3e4d;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #dbdbdb;
+            padding-bottom: 20px;
+        }
+
+        .profile img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 3px solid #ff3e4d;
+        }
+
+        .profile h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #262626;
+        }
+
+        .profile p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .feed {
+            margin-bottom: 20px;
+        }
+
+        .post {
+            border: 1px solid #dbdbdb;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .post:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .post h4 {
+            margin: 0 0 10px;
+            font-size: 16px;
+            color: #262626;
+        }
+
+        .post img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .like-button {
+            background-color: #ff3e4d;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+
+        .like-button:hover {
+            background-color: #ff1f30;
+        }
+
+        .comment-section {
+            margin-top: 10px;
+            display: flexbox;
+            align-items: center;
+        }
+
+        .comment-section input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+
+        .comment-section button {
+            padding: 8px 12px;
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .comment-section button:hover {
+            background-color: #007bbf;
+        }
+
+        .footer {
+            background-color: #ffffff;
+            color: #999;
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #dbdbdb;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer .nav {
+            margin: 10px 0;
+        }
+
+        .footer .nav a {
+            margin: 0 10px;
+            color: #0095f6;
+            transition: color 0.3s;
+        }
+
+        .footer .nav a:hover {
+            text-decoration: underline;
+        }
+
+        .post-form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        .post-form input[type="text"],
+        .post-form input[type="file"] {
+            padding: 10px;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .post-form button {
+            background-color: #1ecb86;
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .post-form button:hover {
+            background-color: #1ecb86;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>Snapify</h1>
+    </header>
+
+    <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="profile.html">Profile</a>
+        <a href="#">About Us</a>
+    </nav>
+
+    <div class="container">
+        <h2>Our Story</h2>
+        <p>
+            Snapify was born from a simple idea: to create a space where everyone can share their unique stories visually. Founded by a team of passionate photographers and tech enthusiasts, we set out to design a user-friendly app that makes capturing and sharing your life easier and more fun than ever.
+        </p>
+    
+        <h2>What We Offer</h2>
+        <ul>
+            <li><strong>Ewee Posts:</strong> Our innovative feature lets you effortlessly share your photos with friends and followers. Snap, edit, and share your pictures in just a few taps!</li>
+            <li><strong>Creative Filters and Tools:</strong> Explore a variety of filters, stickers, and editing tools to make your photos stand out.</li>
+            <li><strong>Community Engagement:</strong> Join a vibrant community of like-minded individuals. Discover new talents, share feedback, and connect through your love for photography.</li>
+            <li><strong>Privacy First:</strong> We value your privacy and ensure that your shared moments are safe and secure. You control who sees your snaps!</li>
+        </ul>
+    
+        <h2>Join Us</h2>
+        <p>
+            We invite you to be a part of our growing Snapify family. Download the app today, start snapping, and let your creativity shine! Whether you're a seasoned photographer or just someone who loves to capture life’s little moments, Snapify is here for you.
+        </p>
+        
+        <p>Let’s snap the world together!</p>
+
+    <footer class="footer">
+        <div class="nav">
+          
+            <a href="#">Help</a>
+            <a href="#">Contact</a>
+        </div>
+        <p>&copy; 2024 Snapify. All rights reserved.</p>
+    </footer>
+
+  
+   
+</body>
+</html>
